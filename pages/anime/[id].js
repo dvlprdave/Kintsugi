@@ -1,41 +1,43 @@
-// const AnimeCard = () => {
-//   return(
-//     <h1>This is the anime card</h1>
-//   )
-// }
- 
-// export default AnimeCard
 import fetch from 'isomorphic-unfetch'
 import Link from 'next/link'
-import {useRouter} from 'next/router'
 
-const animeUrl = `https://kitsu.io/api/edge/anime`;
+const Post = ({ anime }) => {
+  let {
+    titles: {en},
+    synopsis,
+    posterImage: { medium },
+  } = anime.data.attributes
 
-const Post = ({anime}) => {
-  const router = useRouter();
-  console.log(anime);
-  console.log(anime.data.relationships.animeCharacters.links.related)
   return (
     <div>
       <Link href="/">
         <a>Back to home</a>
       </Link>
       <h1>
-        {anime.data.attributes.titles.en}
+        {en}
       </h1>
-      <p>
-        {anime.data.relationships.animeCharacters.links.related}
-      </p>
+      <img src={medium}/>
+      <p>{synopsis.substring(0, 150)}...</p>
     </div>
   )
 }
 
-Post.getInitialProps = async ctx => {
-  const { query } = ctx
-  const res = await fetch(`https://kitsu.io/api/edge/anime/${query.id}`);
-  const anime = await res.json();
+export const getStaticProps = async ({ params }) => {
+  const res = await fetch(`https://kitsu.io/api/edge/anime/${params.id}`)
+  const anime = await res.json()
 
-  return { anime };
-};
+  return { props: { anime } }
+}
 
-export default Post;
+export const getStaticPaths = async () => {
+  const res = await fetch('https://kitsu.io/api/edge/anime')
+  const anime = await res.json()
+
+  const paths = anime.data.map(show => ({
+    params: { id: show.id }
+  }))
+
+  return {paths, fallback: true}
+}
+
+export default Post
