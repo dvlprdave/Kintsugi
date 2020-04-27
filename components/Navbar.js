@@ -1,5 +1,5 @@
 const Navbar = () => (
-  <nav className="flex items-center justify-between flex-wrap p-6">
+  <nav className="flex items-center justify-between flex-wrap py-6">
     <div className="flex items-center flex-shrink-0 mr-6">
       <span className="font-semibold text-3xl tracking-tight">Kintsugi</span>
     </div>

@@ -1,31 +1,25 @@
 import Head from 'next/head'
-import useSWR from 'swr'
-
+import { SWRConfig } from 'swr'
 import fetcher from '../helpers/fetcher'
-import TrendingAnime from '../components/TrendingAnime'
-import Navbar from './../components/Navbar';
 
-const API_URL = 'https://kitsu.io/api/edge/trending/anime'
+import TrendingAnime from '../components/TopAnimeContainer'
+import Navbar from './../components/Navbar'
+import PopularAnime from './../components/TopAnime/Popular';
 
-const Home = () => {
+const Home = () => (
+  <div className="container">
+    <Head>
+      <title>Kintsugi</title>
+      <link rel="icon" href="/favicon.ico" />
+    </Head>
 
-  const { data, error } = useSWR(API_URL, fetcher)
-
-  if (error) return <div>failed to load</div>
-  if (!data) return <div>loading...</div>
-
-  console.log(data)
-  return (
-    <div className="container">
-      <Head>
-        <title>Kintsugi</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-    <Navbar />
-    <TrendingAnime data={data}/>
-    </div>
-  )
-}
+    <SWRConfig
+      value={{ fetcher }}
+    >
+      <Navbar />
+      <PopularAnime />
+    </SWRConfig>
+  </div>
+)
 
 export default Home

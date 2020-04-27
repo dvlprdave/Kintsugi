@@ -8,6 +8,9 @@ module.exports = {
         center: true,
         padding: '2rem',
       },
+      maxHeight: {
+        '400': '400px',
+      }
     },
   },
   variants: {},
