@@ -1,19 +1,21 @@
 import Link from 'next/link'
 
 const TrendingAnime = ({ data }) => (
-  <div className='sm:justify-between justify-center items-center grid grid-cols-fill gap-4 my-10'>
+  <div className='grid grid-cols-fill gap-6 justify-center my-10'>
     {data.data.map(anime => {
       let {
         canonicalTitle,
-        posterImage: { medium },
+        posterImage: { large },
       } = anime.attributes
 
       return (
-        <div key={anime.id}>
+        <div className='flex-col items-start p-2' key={anime.id}>
           <Link href='/anime/[id]' as={`/anime/${anime.id}`}>
-            <img className='cursor-pointer' src={medium} />
+            <img className='cursor-pointer' src={large} />
           </Link>
-          <h2 className='font-semibold'>{canonicalTitle}</h2>
+          <article className=''>
+            <h3 className='font-semibold pt-2 truncate'>{canonicalTitle}</h3>
+          </article>
         </div>
       )
     })}

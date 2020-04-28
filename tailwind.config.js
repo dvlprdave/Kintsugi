@@ -2,7 +2,7 @@ module.exports = {
   theme: {
     extend: {
       gridTemplateColumns: {
-        'fill': 'repeat(auto-fill, 200px)',
+        'fill': 'repeat(auto-fill,minmax(250px, 1fr))',
       },
       container: {
         center: true,
@@ -10,6 +10,9 @@ module.exports = {
       },
       maxHeight: {
         '400': '400px',
+      },
+      screens: {
+        'xl': '1400px',
       }
     },
   },

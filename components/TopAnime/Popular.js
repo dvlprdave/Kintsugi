@@ -2,10 +2,14 @@ import useSWR from 'swr'
 import TopAnimeContainer from '../TopAnimeContainer'
 
 const PopularAnime = () => {
-  const apiUrl_Popular = 'https://kitsu.io/api/edge/anime?sort=popularityRank'
-  const newSeason = 'https://kitsu.io/api/edge/anime?filter%5Bstreamers%5D=Crunchyroll'
+  const apiUrl_Popular = 'https://kitsu.io/api/edge/anime?sort=-averageRating&filter%5Bsubtype%5D=movie'
+  // TODO: Top Rated Movies & Adventures 
+  // TOP RATED MOVIES const apiUrl_Popular = 'https://kitsu.io/api/edge/anime?sort=-averageRating&filter%5Bsubtype%5D=movie'
+  // TOP RATED ADVENTURE const apiUrl_Popular = 'https://kitsu.io/api/edge/anime?sort=-averageRating&filter%5Bgenres%5D=adventure'
 
   const { data: popularAnime, error } = useSWR(apiUrl_Popular)
+
+  console.log(popularAnime)
   
   if (error) return <div>failed to load</div>
   if (!popularAnime) return <div>loading...</div>
