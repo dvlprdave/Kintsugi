@@ -2,7 +2,7 @@
 import TopAnimeContainer from '../TopAnimeContainer'
 
 const PopularAnime = () => {
-  const apiUrl= 'https://kitsu.io/api/edge/anime?sort=-averageRating'
+  const apiUrl= 'https://kitsu.io/api/edge/anime?page%5Blimit%5D=20&sort=-averageRating'
   // TODO: Top Rated Movies & Adventures 
   // TOP RATED ADVENTURE const apiUrl_Popular = 'https://kitsu.io/api/edge/anime?sort=-averageRating&filter%5Bgenres%5D=adventure'
 
