@@ -2,9 +2,9 @@ import Head from 'next/head'
 import { SWRConfig } from 'swr'
 import fetcher from '../helpers/fetcher'
 
-import TrendingAnime from '../components/TopAnimeContainer'
 import Navbar from './../components/Navbar'
-import PopularAnime from './../components/TopAnime/Popular';
+import PopularAnime from './../components/TopAnime/PopularAnime';
+import PopularFilms from '../components/TopAnime/PopularFilms'
 
 const Home = () => (
   <div className="container">
@@ -18,6 +18,7 @@ const Home = () => (
     >
       <Navbar />
       <PopularAnime />
+      <PopularFilms />
     </SWRConfig>
   </div>
 )
