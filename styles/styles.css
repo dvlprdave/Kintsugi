@@ -23,3 +23,16 @@ h2 {
 h3 {
   @apply text-lg;
 }
+
+/* .slick-arrow {
+  top: 0 !important;
+}
+
+.slick-prev {
+  left: 0 !important;
+  right: 40px !important;
+}
+
+.slick-next {
+  right: 0 !important;
+} */

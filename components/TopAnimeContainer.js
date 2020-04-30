@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import useSWR from 'swr'
-import AnimeSlider from './Slider'
+import AnimeSlider from './AnimeSlider'
 
 const TrendingAnime = ({ apiUrl }) => {
 
@@ -10,8 +10,6 @@ const TrendingAnime = ({ apiUrl }) => {
   if (!data) return <div>loading...</div>
 
   console.log(data)
-
-  
 
   return (
     <div className='px-6 md:px-16 my-10'>
