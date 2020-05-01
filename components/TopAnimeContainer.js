@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import useSWR from 'swr'
-import AnimeSlider from './AnimeSlider'
 
 const TrendingAnime = ({ apiUrl }) => {
 
@@ -12,8 +11,8 @@ const TrendingAnime = ({ apiUrl }) => {
   console.log(data)
 
   return (
-    <div className='px-6 md:px-16 my-10'>
-      <AnimeSlider>
+    <>
+      <div className='grid grid-cols-fill px-6 md:px-16 mt-10'>
         {data.data.map(anime => {
           let {
             canonicalTitle,
@@ -23,7 +22,7 @@ const TrendingAnime = ({ apiUrl }) => {
           return (
             <div className='flex-col items-start p-2' key={anime.id}>
               <Link href='/anime/[id]' as={`/anime/${anime.id}`}>
-                <img className='cursor-pointer' src={large} />
+                <img className='cursor-pointer rounded' src={large} />
               </Link>
               <article className=''>
                 <h3 className='font-semibold pt-2 truncate'>{canonicalTitle}</h3>
@@ -31,8 +30,11 @@ const TrendingAnime = ({ apiUrl }) => {
             </div>
           )
         })}
-      </AnimeSlider>
-    </div>
+      </div>
+      <div className='flex justify-center sm:justify-end sm:pr-16'>
+        <button className='btn btn-gray'>View More</button>
+      </div>
+    </>
   )
 }
 
