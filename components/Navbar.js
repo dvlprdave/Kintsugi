@@ -8,7 +8,7 @@ const Navbar = () => {
   const isBoxVisible = () => !navToggle ? 'hidden' : 'block'
 
   return (
-    <nav className="flex flex-wrap sm:flex-no-wrap items-center justify-between py-6">
+    <nav className="relative flex flex-wrap sm:flex-no-wrap items-center justify-between py-6">
       <div className="flex items-center flex-shrink-0 mr-6">
         <Link href="/">
           <a className="font-semibold text-3xl tracking-tight">Kintsugi</a>

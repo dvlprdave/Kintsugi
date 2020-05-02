@@ -11,6 +11,9 @@ module.exports = {
       maxHeight: {
         '400': '400px',
       },
+      minHeight: {
+        '230': '230px',
+      },
       screens: {
         'xl': '1400px',
       }
