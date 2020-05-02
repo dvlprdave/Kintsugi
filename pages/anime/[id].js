@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-unfetch'
 import Navbar from '../../components/Navbar'
+import TrailerVideo from './../../components/TrailerVideo';
 
 const Post = ({ anime }) => {
   let {
@@ -27,8 +28,9 @@ const Post = ({ anime }) => {
               <p className='max-w-2xl pb-3 overflow-hidden'>{synopsis.substring(0, 250)}...</p>
               {/* <p className='max-w-2xl pb-3 overflow-hidden truncate'>{synopsis}...</p> */}
             </div>
-            <button>Read More</button>
+            <button className='text-teal-500 hover:text-teal-900 transition ease-in-out duration-500'>Read More</button>
           </div>
+          <TrailerVideo videoId={youtubeVideoId} className='self-end' />
         </div>
       </div>
     </div>
