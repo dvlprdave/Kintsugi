@@ -1,5 +1,4 @@
 import fetch from 'isomorphic-unfetch'
-import Link from 'next/link'
 import Navbar from '../../components/Navbar'
 
 const Post = ({ anime }) => {
@@ -34,6 +33,12 @@ export const getStaticProps = async ({ params }) => {
 }
 
 export const getStaticPaths = async () => {
+  // TODO: use promise.all or not 
+  // const [anime, animeMovies] = await Promise.all([
+  //   fetch('https://kitsu.io/api/edge/anime'),
+  //   fetch('https://kitsu.io/api/edge/anime?filter%5Bsubtype%5D=movie')
+  // ]).then(responses => responses.map(response => response.json()))
+    // .catch(e => console.log(e,"There was an error retrieving the data"));
   const res = await fetch('https://kitsu.io/api/edge/anime')
   const anime = await res.json()
 

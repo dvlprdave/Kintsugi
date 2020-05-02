@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import useSWR from 'swr'
 
+import NextArrow from '../public/next-arrow.svg'
+
 const TrendingAnime = ({ apiUrl }) => {
 
   const { data, error } = useSWR(apiUrl)
@@ -24,7 +26,7 @@ const TrendingAnime = ({ apiUrl }) => {
               <Link href='/anime/[id]' as={`/anime/${anime.id}`}>
                 <img className='cursor-pointer rounded' src={large} />
               </Link>
-              <article className=''>
+              <article>
                 <h3 className='font-semibold pt-2 truncate'>{canonicalTitle}</h3>
               </article>
             </div>
@@ -32,7 +34,9 @@ const TrendingAnime = ({ apiUrl }) => {
         })}
       </div>
       <div className='flex justify-center sm:justify-end sm:pr-16'>
-        <button className='btn btn-gray'>View More</button>
+        <button className='flex items-center text-gray-400 hover:opacity-25 transition ease-in-out duration-500'>
+          More <span className='pl-2'><NextArrow className='fill-current text-teal-500' /></span>
+        </button>
       </div>
     </>
   )
