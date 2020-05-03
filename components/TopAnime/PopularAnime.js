@@ -5,7 +5,13 @@ const PopularAnime = ({ limit = '4' }) => {
   // TODO: Top Rated Movies & Adventures 
   // TOP RATED ADVENTURE const apiUrl_Popular = 'https://kitsu.io/api/edge/anime?sort=-averageRating&filter%5Bgenres%5D=adventure'
 
-  return <TopAnimeContainer apiUrl={apiUrl} popular='top anime' />
+  return (
+    <TopAnimeContainer 
+    apiUrl={apiUrl} 
+    popular='top anime' 
+    headingLabel='Highest Rated Anime' 
+    page='popularAnime' />
+  )
 }
 
 export default PopularAnime

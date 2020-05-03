@@ -2,7 +2,6 @@ import Head from 'next/head'
 import { SWRConfig } from 'swr'
 import fetcher from '../helpers/fetcher'
 
-import Navbar from './../components/Navbar'
 import PopularAnime from './../components/TopAnime/PopularAnime';
 import PopularFilms from '../components/TopAnime/PopularFilms'
 

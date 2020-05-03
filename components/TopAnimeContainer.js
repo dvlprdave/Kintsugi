@@ -1,21 +1,24 @@
 import Link from 'next/link'
 import useSWR from 'swr'
+import { useRouter } from 'next/router'
 
 import NextArrow from '../public/next-arrow.svg'
-import fetcher from './../helpers/fetcher';
+import fetcher from './../helpers/fetcher'
 
-const TrendingAnime = ({ apiUrl, popular }) => {
+const TrendingAnime = ({ apiUrl, page, headingLabel }) => {
+  const router = useRouter()
 
   const { data, error } = useSWR(apiUrl, fetcher)
 
   if (error) return <div>failed to load</div>
   if (!data) return <div>loading...</div>
 
-  console.log(data)
+  let headingLabelStyle = router.pathname === '/' ? '' : 'text-center mb-10'
 
   return (
-    <>
-      <div className='grid grid-cols-fill gap-6 mt-10'>
+    <div className='mb-10'>
+      <h1 className={`mb-5 ${headingLabelStyle}`}>{headingLabel}</h1>
+      <div className='grid grid-cols-fill gap-6'>
         {data.data.map(anime => {
           let {
             canonicalTitle,
@@ -35,17 +38,19 @@ const TrendingAnime = ({ apiUrl, popular }) => {
         })}
       </div>
 
-      <div className='flex justify-center sm:justify-end sm:pr-16'>
-        <button className='text-gray-400 hover:opacity-25 transition ease-in-out duration-500'>
-          <Link href='/anime/top/popularFilms' as={`/anime/top/${popular}`}>
-            <a className='flex items-center'>
-              More 
-              <span className='pl-2'><NextArrow className='fill-current text-teal-500' /></span>
-            </a>
-          </Link>
-        </button>
-      </div>
-    </>
+      {router.pathname === '/' && (
+        <div className='flex justify-center sm:justify-end'>
+          <button className='text-gray-400 hover:opacity-25 transition ease-in-out duration-500'>
+            <Link href={`/anime/top/${page}`} as={`/anime/top/${page}`}>
+              <a className='flex items-center'>
+                More
+               <span className='pl-2'><NextArrow className='fill-current text-teal-500' /></span>
+              </a>
+            </Link>
+          </button>
+        </div>
+      )}
+    </div>
   )
 }
 

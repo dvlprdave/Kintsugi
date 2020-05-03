@@ -39,3 +39,6 @@ h3 {
 }
 
 /* Line Clamping */
+.video-span {
+  grid-row: span 4;
+}

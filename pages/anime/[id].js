@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-unfetch'
 import Navbar from '../../components/Navbar'
-import TrailerVideo from './../../components/TrailerVideo';
+import TrailerVideo from './../../components/TrailerVideo'
 
 const Post = ({ anime }) => {
   let {
@@ -19,9 +19,10 @@ const Post = ({ anime }) => {
       </div>
       <div className='relative container z-50'>
         <Navbar />
-        <div className='mt-16 flex'>
+        <div className='mt-16 grid grid-cols-anime gap-6'>
           <img className='z-50' src={small} />
-          <div className='self-end pl-8'>
+
+          <div className='self-end'>
             <h1 className='sm:text-3xl'>{en}</h1>
             <h1 className='sm:text-3xl pb-4'>{ja_jp}</h1>
             <div>
@@ -30,7 +31,10 @@ const Post = ({ anime }) => {
             </div>
             <button className='text-teal-500 hover:text-teal-900 transition ease-in-out duration-500'>Read More</button>
           </div>
-          <TrailerVideo videoId={youtubeVideoId} className='self-end' />
+
+          <div className='self-end video-span'>
+            <TrailerVideo videoId={youtubeVideoId} />
+          </div>
         </div>
       </div>
     </div>
