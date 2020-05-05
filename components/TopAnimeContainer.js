@@ -41,7 +41,7 @@ const TrendingAnime = ({ apiUrl, page, headingLabel }) => {
       {router.pathname === '/' && (
         <div className='flex justify-center sm:justify-end'>
           <button className='text-gray-400 hover:opacity-25 transition ease-in-out duration-500'>
-            <Link href={`/anime/top/${page}`} as={`/anime/top/${page}`}>
+            <Link href={`/anime/top/${page}`}>
               <a className='flex items-center'>
                 More
                <span className='pl-2'><NextArrow className='fill-current text-teal-500' /></span>

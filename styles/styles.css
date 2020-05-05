@@ -40,5 +40,14 @@ h3 {
 
 /* Line Clamping */
 .video-span {
-  grid-row: span 4;
+  grid-row: span 1;
+}
+
+.character-grid {
+  justify-items: center;
+}
+
+.character-img {
+  width: 150px;
+  height: 180px;
 }
