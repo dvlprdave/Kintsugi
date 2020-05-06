@@ -1,12 +1,11 @@
 import {useState, useEffect} from 'react'
-import useSWR from 'swr'
-import Link from 'next/link'
-import fetcher from './../../helpers/fetcher'
-
 import fetch from 'isomorphic-unfetch'
+import useSWR from 'swr'
+import fetcher from './../../helpers/fetcher'
+import formatedDates from './../../helpers/formatDates';
+
 import Navbar from '../../components/Navbar'
 import TrailerVideo from '../../components/TrailerVideo'
-
 
 const Post = ({ anime, animeCharacters }) => {
   const [notMobile, setNotMobile] = useState(true)
@@ -24,12 +23,16 @@ const Post = ({ anime, animeCharacters }) => {
   let {
     titles: { en, ja_jp },
     synopsis,
+    startDate,
+    endDate,
+    ageRating,
+    ageRatingGuide,
     posterImage: { small },
     coverImage: { large },
     youtubeVideoId
   } = anime.data.attributes
 
-  const characterName = animeCharacters.data.map(char => {
+  const characters = animeCharacters.data.map(char => {
     let { related } = char.relationships.character.links
 
     const { data, error } = useSWR(related, fetcher)
@@ -42,15 +45,15 @@ const Post = ({ anime, animeCharacters }) => {
       let { name } = item.attributes
 
       return (
-        <div>
-          <img src={characterImg} alt="character" className='character-img object-contain' />
-          <p className='text-center'>{name}</p>
+        <div key={item.id}>
+          <img className='character-img object-cover' src={characterImg} alt="character"  />
+          <p className='text-left text-sm truncate'>{name}</p>
         </div>
       )
     })
 
     return (
-      <ul>
+      <ul key={char.id}>
         <li>{names}</li>
       </ul>
     )
@@ -76,23 +79,37 @@ const Post = ({ anime, animeCharacters }) => {
 
           </div>
 
-          <div className='lg:self-end video-span md:mt-10'>
+          <div className='lg:self-end md:row-start-3 lg:row-start-1 lg:col-start-3 video-span md:mt-10'>
             {notMobile ? (
               <TrailerVideo videoId={youtubeVideoId} />
             ) : (
               <div>
                 <a className='z-99 p-12' href={`https://www.youtube.com/watch?v=${youtubeVideoId}`} target='_blank'>
-                  <TrailerVideo videoId={youtubeVideoId} height='90' />
+                  <TrailerVideo videoId={youtubeVideoId} height='90' width='100%' />
                 </a>
               </div>
-            )
-          }
+            )}
           </div>
 
+          <div className='md:col-start-1 row-start-3 md:row-start-2 lg:row-start-2'>
+            <h1 className='mb-2'>Anime Details</h1>
+            <ul>
+              <li>
+                <span className='font-bold'>Japanese Title:</span> {ja_jp}
+              </li>
+              <li>
+                <span className='font-bold'>Aired:</span> {formatedDates(startDate, endDate)}
+              </li>
+              <li>
+                <span className='font-bold'>Rating:</span> {ageRating} / {ageRatingGuide}
+              </li>
+            </ul>
 
-          <div className='character-grid grid grid-cols-3 md:col-span-2 lg:col-start-3 gap-4 pt-10 md:p-12 lg:p-10'>
-            <h1 className='col-span-3'>Characters</h1>
-            {characterName}
+          </div>
+
+          <div className='character-grid grid md:grid-cols-3 md:grid-cols-5 md:col-span-2 lg:col-start-3 gap-4'>
+            <h3 className='col-span-3 md:col-span-5'>Characters</h3>
+            {characters}
           </div>
         </div>
       </div>
