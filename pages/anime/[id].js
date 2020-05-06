@@ -1,11 +1,26 @@
+import {useState, useEffect} from 'react'
+import useSWR from 'swr'
+import Link from 'next/link'
+import fetcher from './../../helpers/fetcher'
+
 import fetch from 'isomorphic-unfetch'
 import Navbar from '../../components/Navbar'
 import TrailerVideo from '../../components/TrailerVideo'
 
-import useSWR from 'swr'
-import fetcher from './../../helpers/fetcher'
 
 const Post = ({ anime, animeCharacters }) => {
+  const [notMobile, setNotMobile] = useState(true)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setNotMobile(window.innerWidth > 768)
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => { window.removeEventListener('resize', handleResize) }
+  }, [])
+  
+
   let {
     titles: { en, ja_jp },
     synopsis,
@@ -23,12 +38,12 @@ const Post = ({ anime, animeCharacters }) => {
     if (!data) return <div>loading...</div>
 
     const names = Object.values(data).map((item) => {
-      let {original: characterImg} = item.attributes.image
-      let {name} = item.attributes
-      
+      let { original: characterImg } = item.attributes.image
+      let { name } = item.attributes
+
       return (
         <div>
-          <img src={characterImg} alt="character" className='character-img object-fill' />
+          <img src={characterImg} alt="character" className='character-img object-contain' />
           <p className='text-center'>{name}</p>
         </div>
       )
@@ -48,32 +63,40 @@ const Post = ({ anime, animeCharacters }) => {
       </div>
       <div className='relative container z-50'>
         <Navbar />
-        <div className='mt-16 grid grid-cols-anime gap-6'>
+        <div className='mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-anime gap-6'>
           <img className='z-50' src={small} />
 
-          <div className='self-end'>
+          <div className='md:col-start-2 self-end'>
             <h1 className='sm:text-3xl'>{en}</h1>
             <h1 className='sm:text-3xl pb-4'>{ja_jp}</h1>
             <div>
               <p className='max-w-2xl pb-3 overflow-hidden'>{synopsis.substring(0, 250)}...</p>
-              {/* <p className='max-w-2xl pb-3 overflow-hidden truncate'>{synopsis}...</p> */}
             </div>
             <button className='text-teal-500 hover:text-teal-900 transition ease-in-out duration-500'>Read More</button>
 
           </div>
 
-          <div className='self-end video-span'>
-            <TrailerVideo videoId={youtubeVideoId} />
+          <div className='lg:self-end video-span md:mt-10'>
+            {notMobile ? (
+              <TrailerVideo videoId={youtubeVideoId} />
+            ) : (
+              <div>
+                <a className='z-99 p-12' href={`https://www.youtube.com/watch?v=${youtubeVideoId}`} target='_blank'>
+                  <TrailerVideo videoId={youtubeVideoId} height='90' />
+                </a>
+              </div>
+            )
+          }
           </div>
 
-          
-          <div className='grid grid-cols-3 col-start-3 gap-4 pt-10 character-grid'>
+
+          <div className='character-grid grid grid-cols-3 md:col-span-2 lg:col-start-3 gap-4 pt-10 md:p-12 lg:p-10'>
             <h1 className='col-span-3'>Characters</h1>
-          {characterName}
+            {characterName}
           </div>
         </div>
       </div>
-    </div>  
+    </div>
   )
 }
 

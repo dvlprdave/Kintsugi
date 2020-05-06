@@ -1,11 +1,11 @@
 import YouTube from 'react-youtube'
 
-const TrailerVideo = ({videoId}) => {
+const TrailerVideo = ({videoId, height='290'}) => {
   const opts = {
-    height: '290',
+    height: height,
     width: '540'
   }
-  
+
   return <YouTube videoId={videoId} opts={opts} />
 }
 

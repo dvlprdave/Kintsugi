@@ -41,6 +41,7 @@ h3 {
 /* Line Clamping */
 .video-span {
   grid-row: span 1;
+  justify-items: center;
 }
 
 .character-grid {
