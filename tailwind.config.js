@@ -3,7 +3,7 @@ module.exports = {
     extend: {
       gridTemplateColumns: {
         'fill': 'repeat(auto-fill,minmax(250px, 1fr))',
-        'anime': 'max-content 1fr 1fr',
+        'anime': '1fr 1fr 1fr',
       },
       container: {
         center: true,
