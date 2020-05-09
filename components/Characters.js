@@ -12,15 +12,22 @@ const Characters = ({ animeCharacters }) => (
     if (!data) return <div>loading...</div>
 
     const names = Object.values(data).map((item) => {
-      let { original: characterImg } = item.attributes.image
+      let characterImg = item.attributes.image
       let { name } = item.attributes
 
       return (
         <div className='w-20 h-auto md:w-full' key={item.id}>
-          <div>
-            <img className='character-img object-cover' src={characterImg} alt="character" />
-            <p className='text-left text-sm'>{name}</p>
-          </div>
+          {
+            characterImg
+            ? (
+              <div>
+                <img className='character-img object-cover' src={characterImg.original} alt="character" />
+                <p className='text-left text-sm'>{name}</p>
+              </div>
+            ) 
+            : null
+          } 
+         
         </div>
       )
     })
