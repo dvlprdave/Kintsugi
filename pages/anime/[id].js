@@ -5,10 +5,15 @@ import formatedDates from './../../helpers/formatDates';
 import Navbar from '../../components/Navbar'
 import TrailerVideo from '../../components/TrailerVideo'
 import Characters from './../../components/Characters'
-// import {coverImgPlaceholder} from '../../public/cover-img-default.jpg'
 
 const Post = ({ anime, animeCharacters }) => {
   const [notMobile, setNotMobile] = useState(true)
+  const [readMore, setReadMore] = useState(250)
+
+  const handleReadMore = () =>{
+    if(readMore === false) return setReadMore(250)
+    return setReadMore(1000)
+  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -44,19 +49,19 @@ const Post = ({ anime, animeCharacters }) => {
       <div className='relative container z-50'>
         <Navbar />
 
-        <div className='mt-16 grid grid-cols-1 md:grid-cols-maxContent xl:grid-cols-anime gap-6'>
+        <div className='mt-16 grid grid-cols-1 md:grid-cols-maxContent lg:grid-cols-large xl:grid-cols-anime gap-6'>
           <img className='z-50' src={small} />
 
           <div className='md:col-start-2 self-end lg:pt-16'>
-            <h1 className='sm:text-3xl'>{en}</h1>
-            <h2 className='sm:text-xl lg:text-2xl pb-4 text-teal-500'>{averageRating} Community Rating</h2>
+            <h1 className='sm:text-3xl pb-1'>{en}</h1>
+            <h2 className='sm:text-xl lg:text-2xl pb-4 text-teal-500 align-middle'>{averageRating} <span className='text-white text-base lg:text-lg'>Community Rating</span></h2>
             <div>
-              <p className='max-w-2xl pb-3 overflow-hidden xl:text-lg'>{synopsis.substring(0, 250)}...</p>
+              <p className='max-w-2xl pb-3 overflow-hidden xl:text-lg'>{synopsis.substring(0, readMore)}...</p>
             </div>
-            <button className='text-teal-500 hover:text-teal-900 transition ease-in-out duration-500'>Read More</button>
+            <button className='text-teal-500 hover:text-teal-900 transition ease-in-out duration-500' onClick={handleReadMore}>Read More</button>
           </div>
 
-          <div className='lg:self-end md:row-start-3 lg:row-start-1 lg:col-start-3 video-span md:mt-10'>
+          <div className='lg:self-end md:row-start-3 md:col-span-2 lg:row-start-1 lg:col-start-3 lg:col-end-3 video-span md:mt-10'>
             {notMobile ? (
               <TrailerVideo videoId={youtubeVideoId} />
             ) : (
@@ -87,8 +92,8 @@ const Post = ({ anime, animeCharacters }) => {
 
           </div>
 
-          <div className='character-grid grid grid-cols-4 md:grid-cols-3 md:grid-cols-4 md:col-span-2 lg:col-start-3 lg:col-end-3 gap-4'>
-            <h3 className='col-span-4 md:col-span-4 md:text-lg'>Characters</h3>
+          <div className='character-grid grid grid-cols-4 md:col-span-2 lg:col-start-3 lg:col-end-3 gap-4'>
+            <h3 className='col-span-4 md:col-span-4 md:text-lg pb-4 font-bold'>Characters</h3>
             {
               !count 
               ? <p className='col-span-4 md:text-lg'>There are no viewable characters</p> 

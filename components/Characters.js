@@ -16,13 +16,15 @@ const Characters = ({ animeCharacters }) => (
       let { name } = item.attributes
 
       return (
-        <div className='w-20 h-auto md:w-full' key={item.id}>
+        <div key={item.id}>
           {
             characterImg
             ? (
               <div>
-                <img className='character-img object-cover' src={characterImg.original} alt="character" />
-                <p className='text-left text-sm'>{name}</p>
+                <div className=' h-full md:w-24 lg:w-16 xl:w-auto'>
+                  <img className='object-cover' src={characterImg.original} alt="character" />
+                </div>
+                <p className='text-left text-sm'>{name.substring(0, 13)}</p>
               </div>
             ) 
             : null
