@@ -6,7 +6,7 @@ const TrailerVideo = ({videoId, height, width='100%'}) => {
     width
   }
 
-  return <YouTube className='w:auto md:w-4/5 lg:w-full lg:h-48 xl:h-64' videoId={videoId} opts={opts} />
+  return <YouTube className='w:auto md:w-4/5 lg:w-full lg:h-36 xl:h-48' videoId={videoId} opts={opts} />
 }
 
 export default TrailerVideo

@@ -26,7 +26,7 @@ const TrendingAnime = ({ apiUrl, page, headingLabel }) => {
           } = anime.attributes
 
           return (
-            <div className='flex-col items-start' key={anime.id}>
+            <div className='flex-col items-start mb-4' key={anime.id}>
               <Link href='/anime/[id]' as={`/anime/${anime.id}`}>
                 <img className='cursor-pointer rounded' src={large} />
               </Link>

@@ -1,6 +1,6 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import fetch from 'isomorphic-unfetch'
-import formatedDates from './../../helpers/formatDates';
+import formatedDates from './../../helpers/formatDates'
 
 import Navbar from '../../components/Navbar'
 import TrailerVideo from '../../components/TrailerVideo'
@@ -8,12 +8,9 @@ import Characters from './../../components/Characters'
 
 const Post = ({ anime, animeCharacters }) => {
   const [notMobile, setNotMobile] = useState(true)
-  const [readMore, setReadMore] = useState(250)
+  const [readMore, setReadMore] = useState(false)
 
-  const handleReadMore = () =>{
-    if(readMore === false) return setReadMore(250)
-    return setReadMore(1000)
-  }
+  const handleReadMore = () => setReadMore(prevState => !prevState)
 
   useEffect(() => {
     const handleResize = () => {
@@ -23,7 +20,7 @@ const Post = ({ anime, animeCharacters }) => {
     window.addEventListener('resize', handleResize)
     return () => { window.removeEventListener('resize', handleResize) }
   }, [])
-  
+
   let {
     titles: { en, ja_jp },
     synopsis,
@@ -37,9 +34,15 @@ const Post = ({ anime, animeCharacters }) => {
     coverImage,
     youtubeVideoId
   } = anime.data.attributes
-  
+
   const defaultImg = '/cover-img-default.jpg'
-  let {count} = animeCharacters.meta
+  let { count } = animeCharacters.meta
+
+  const synopsisSubString = () => (
+    !readMore
+      ? synopsis.substring(0, 240)
+      : synopsis.substring(0, 2000)
+  )
 
   return (
     <div className='relative'>
@@ -49,57 +52,68 @@ const Post = ({ anime, animeCharacters }) => {
       <div className='relative container z-50'>
         <Navbar />
 
-        <div className='mt-16 grid grid-cols-1 md:grid-cols-maxContent lg:grid-cols-large xl:grid-cols-anime gap-6'>
-          <img className='z-50' src={small} />
+        <div className='mt-16 flex flex-wrap md:flex-no-wrap'>
+          {/* Main  */}
+          <div className=''>
+            <img className='z-50 mb-6' src={small} />
 
-          <div className='md:col-start-2 self-end lg:pt-16'>
-            <h1 className='sm:text-3xl pb-1'>{en}</h1>
-            <h2 className='sm:text-xl lg:text-2xl pb-4 text-teal-500 align-middle'>{averageRating} <span className='text-white text-base lg:text-lg'>Community Rating</span></h2>
-            <div>
-              <p className='max-w-2xl pb-3 overflow-hidden xl:text-lg'>{synopsis.substring(0, readMore)}...</p>
+            <div className='xl:text-xl'>
+              <h1 className='mb-2'>Anime Details</h1>
+              <ul>
+                <li>
+                  <span className='font-bold'>Japanese Title:</span> {ja_jp}
+                </li>
+                <li>
+                  <span className='font-bold'>Aired:</span> {formatedDates(startDate, endDate)}
+                </li>
+                <li>
+                  <span className='font-bold'>Rating:</span> {ageRating} / {ageRatingGuide}
+                </li>
+                <li>
+                  <span className='font-bold'>Episodes:</span> {episodeCount}
+                </li>
+              </ul>
             </div>
-            <button className='text-teal-500 hover:text-teal-900 transition ease-in-out duration-500' onClick={handleReadMore}>Read More</button>
           </div>
 
-          <div className='lg:self-end md:row-start-3 md:col-span-2 lg:row-start-1 lg:col-start-3 lg:col-end-3 video-span md:mt-10'>
-            {notMobile ? (
-              <TrailerVideo videoId={youtubeVideoId} />
-            ) : (
+          {/* Info Section */}
+          <div className='flex flex-wrap lg:flex-no-wrap md:flex-1 xl:flex-initial'>
+            {/* Center */}
+            <div className='mt-6 md:mt-40 md:mx-6'>
+              <h1 className='sm:text-3xl pb-1'>{en}</h1>
+              <h2 className='sm:text-xl lg:text-2xl pb-4 text-teal-500'>{averageRating} <span className='text-white text-base lg:text-lg'>Community Rating</span></h2>
               <div>
-                <a className='z-99 p-12' href={`https://www.youtube.com/watch?v=${youtubeVideoId}`} target='_blank'>
-                  <TrailerVideo videoId={youtubeVideoId} height='90' width='100%' />
-                </a>
+                <p className='max-w-2xl pb-3 overflow-hidden xl:text-lg'>{synopsisSubString()}<span className={!readMore ? 'inline' : 'hidden'}>...</span></p>
+                <button className='text-teal-500 hover:text-teal-900 transition ease-in-out duration-500' onClick={handleReadMore}>{!readMore ? 'Read More' : 'Read Less'}</button>
               </div>
-            )}
+            </div>
+
+            {/* Sidebar */}
+            <section className='max-w-full lg:max-w-xs mt-10'>
+              <div className=' md:mt-10 mb-6'>
+                {notMobile ? (
+                  <TrailerVideo videoId={youtubeVideoId} />
+                ) : (
+                    <div>
+                      <a className='z-99 p-12' href={`https://www.youtube.com/watch?v=${youtubeVideoId}`} target='_blank'>
+                        <TrailerVideo videoId={youtubeVideoId} height='90' width='100%' />
+                      </a>
+                    </div>
+                  )}
+              </div>
+
+              <div className='character-grid grid grid-cols-4 gap-4'>
+                <h3 className='col-span-4 md:col-span-4 md:text-lg pb-4 font-bold'>Characters</h3>
+                {
+                  !count
+                    ? <p className='col-span-4 md:text-lg'>There are no viewable characters</p>
+                    : <Characters animeCharacters={animeCharacters} />
+                }
+              </div>
+            </section>
           </div>
 
-          <div className='md:col-start-1 row-start-3 md:row-start-2 lg:row-start-2 xl:text-xl'>
-            <h1 className='mb-2'>Anime Details</h1>
-            <ul>
-              <li>
-                <span className='font-bold'>Japanese Title:</span> {ja_jp}
-              </li>
-              <li>
-                <span className='font-bold'>Aired:</span> {formatedDates(startDate, endDate)}
-              </li>
-              <li>
-                <span className='font-bold'>Rating:</span> {ageRating} / {ageRatingGuide}
-              </li>
-              <li>
-                <span className='font-bold'>Episodes:</span> {episodeCount}
-              </li>
-            </ul>
 
-          </div>
-
-          <div className='character-grid grid grid-cols-4 md:col-span-2 lg:col-start-3 lg:col-end-3 gap-4'>
-            <h3 className='col-span-4 md:col-span-4 md:text-lg pb-4 font-bold'>Characters</h3>
-            {
-              !count 
-              ? <p className='col-span-4 md:text-lg'>There are no viewable characters</p> 
-              : <Characters animeCharacters={animeCharacters} /> 
-            }
-          </div>
         </div>
       </div>
     </div>
