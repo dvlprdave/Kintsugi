@@ -19,17 +19,17 @@ const Characters = ({ animeCharacters }) => (
         <div key={item.id}>
           {
             characterImg
-            ? (
-              <div>
-                <div className=' h-full md:w-24 lg:w-16 xl:w-auto'>
-                  <img className='object-cover' src={characterImg.original} alt="character" />
+              ? (
+                <div>
+                  <div className='h-full md:w-24 lg:w-16 xl:w-auto'>
+                    <img className='object-cover' src={characterImg.original} alt="character" />
+                  </div>
+                  <p className='text-left text-sm'>{name.substring(0, 13)}</p>
                 </div>
-                <p className='text-left text-sm'>{name.substring(0, 13)}</p>
-              </div>
-            ) 
-            : null
-          } 
-         
+              )
+              : null
+          }
+
         </div>
       )
     })

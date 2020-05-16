@@ -57,7 +57,7 @@ const Post = ({ anime, animeCharacters, categories }) => {
 
         <div className='mt-16 flex flex-wrap md:flex-no-wrap'>
           {/* Main  */}
-          <div className='md:max-w-1/4'>
+          <div className='md:max-w-284'>
             <img className='z-50 mb-6' src={small} />
 
             <div className='xl:text-lg'>
@@ -81,7 +81,7 @@ const Post = ({ anime, animeCharacters, categories }) => {
 
           {/* Info Section */}
           <div className='flex flex-wrap lg:flex-no-wrap md:flex-1 '>
-            <div className='mt-6 md:mt-40 md:mx-10'>
+            <div className='mt-6 md:mt-40 md:ml-6 lg:mr-10'>
               <h1 className='sm:text-3xl pb-1'>{en}</h1>
               <h2 className='sm:text-xl lg:text-2xl pb-4 text-teal-500'>{averageRating} <span className='text-white text-base lg:text-lg'>Community Rating</span></h2>
               <div>
@@ -92,8 +92,10 @@ const Post = ({ anime, animeCharacters, categories }) => {
             </div>
 
             {/* Sidebar */}
-            <section className='max-w-full lg:max-w-sm mt-10'>
+            <section className='max-w-full lg:max-w-sm mt-10 md:ml-6 lg:ml-0'>
               <div className=' md:mt-10 mb-6'>
+                <h2 className='md:text-lg pb-6 font-bold'>Trailer</h2>
+
                 {notMobile ? (
                   <TrailerVideo videoId={youtubeVideoId} />
                 ) : (
@@ -105,8 +107,8 @@ const Post = ({ anime, animeCharacters, categories }) => {
                   )}
               </div>
 
-              <div className='character-grid grid grid-cols-4 gap-4'>
-                <h3 className='col-span-4 md:col-span-4 md:text-lg pb-4 font-bold'>Characters</h3>
+              <div className='grid grid-cols-4 xl:grid-cols-5 gap-4'>
+                <h3 className='col-span-4 md:col-span-4 xl:col-span-5 md:text-xl pb-2 font-bold'>Characters</h3>
                 {
                   !count
                     ? <p className='col-span-4 md:text-lg'>There are no viewable characters</p>

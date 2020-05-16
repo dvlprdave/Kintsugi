@@ -43,7 +43,3 @@ h3 {
   grid-row: span 1;
   justify-items: center;
 }
-
-.character-grid {
-  justify-items: center;
-}
