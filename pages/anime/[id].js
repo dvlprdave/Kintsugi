@@ -5,8 +5,9 @@ import formatedDates from './../../helpers/formatDates'
 import Navbar from '../../components/Navbar'
 import TrailerVideo from '../../components/TrailerVideo'
 import Characters from './../../components/Characters'
+import Categories from '../../components/Categories';
 
-const Post = ({ anime, animeCharacters }) => {
+const Post = ({ anime, animeCharacters, categories }) => {
   const [notMobile, setNotMobile] = useState(true)
   const [readMore, setReadMore] = useState(false)
 
@@ -44,6 +45,8 @@ const Post = ({ anime, animeCharacters }) => {
       : synopsis.substring(0, 2000)
   )
 
+  console.log(categories)
+
   return (
     <div className='relative'>
       <div className='z-0'>
@@ -54,10 +57,10 @@ const Post = ({ anime, animeCharacters }) => {
 
         <div className='mt-16 flex flex-wrap md:flex-no-wrap'>
           {/* Main  */}
-          <div className=''>
+          <div className='md:max-w-1/4'>
             <img className='z-50 mb-6' src={small} />
 
-            <div className='xl:text-xl'>
+            <div className='xl:text-lg'>
               <h1 className='mb-2'>Anime Details</h1>
               <ul>
                 <li>
@@ -77,19 +80,19 @@ const Post = ({ anime, animeCharacters }) => {
           </div>
 
           {/* Info Section */}
-          <div className='flex flex-wrap lg:flex-no-wrap md:flex-1 xl:flex-initial'>
-            {/* Center */}
-            <div className='mt-6 md:mt-40 md:mx-6'>
+          <div className='flex flex-wrap lg:flex-no-wrap md:flex-1 '>
+            <div className='mt-6 md:mt-40 md:mx-10'>
               <h1 className='sm:text-3xl pb-1'>{en}</h1>
               <h2 className='sm:text-xl lg:text-2xl pb-4 text-teal-500'>{averageRating} <span className='text-white text-base lg:text-lg'>Community Rating</span></h2>
               <div>
                 <p className='max-w-2xl pb-3 overflow-hidden xl:text-lg'>{synopsisSubString()}<span className={!readMore ? 'inline' : 'hidden'}>...</span></p>
                 <button className='text-teal-500 hover:text-teal-900 transition ease-in-out duration-500' onClick={handleReadMore}>{!readMore ? 'Read More' : 'Read Less'}</button>
               </div>
+              <Categories categories={categories} />
             </div>
 
             {/* Sidebar */}
-            <section className='max-w-full lg:max-w-xs mt-10'>
+            <section className='max-w-full lg:max-w-sm mt-10'>
               <div className=' md:mt-10 mb-6'>
                 {notMobile ? (
                   <TrailerVideo videoId={youtubeVideoId} />
@@ -121,14 +124,15 @@ const Post = ({ anime, animeCharacters }) => {
 }
 
 export const getStaticProps = async ({ params }) => {
-  const [anime, animeCharacters] = await Promise.all([
+  const [anime, animeCharacters, categories] = await Promise.all([
     fetch(`https://kitsu.io/api/edge/anime/${params.id}`),
     fetch(`https://kitsu.io/api/edge/anime/${params.id}/characters`),
+    fetch(`https://kitsu.io/api/edge/anime/${params.id}/categories`),
   ])
-    .then(responses => Promise.all(responses.map(response => response.json())))
+  .then(responses => Promise.all(responses.map(response => response.json())))
     .catch(e => console.log(e, "There was an error retrieving the data"))
 
-  return { props: { anime, animeCharacters } }
+  return { props: { anime, animeCharacters, categories } }
 }
 
 export const getStaticPaths = async () => {
