@@ -7,10 +7,11 @@ const PopularAnime = ({ limit = '4' }) => {
 
   return (
     <TopAnimeContainer 
-    apiUrl={apiUrl} 
-    popular='top anime' 
-    headingLabel='Highest Rated Anime' 
-    page='popularAnime' />
+      apiUrl={apiUrl} 
+      popular='top anime' 
+      headingLabel='Highest Rated Anime' 
+      page='popularAnime' 
+    />
   )
 }
 
