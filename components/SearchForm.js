@@ -1,7 +1,7 @@
 import { useState } from 'react'
+import Link from 'next/link'
 
-const SearchForm = () => {
-  // const [dataItems, setDataItems] = useState([])
+const SearchForm = ({search}) => {
   const [searchValue, setSearchValue] = useState('')
   const [formError, setFormError] = useState('')
 
@@ -10,15 +10,15 @@ const SearchForm = () => {
    const handleSubmit = async (e) => {
     e.preventDefault()
 
-    console.log(searchValue);
-    
     let animeQuery = searchValue
     const res = await fetch(`https://kitsu.io/api/edge/anime?filter[text]=${animeQuery}`)
     const animeData = await res.json()
 
-    console.log(animeData);
+    console.log(animeData)
     
     if(!animeData) return setFormError('Please enter Anime title')
+
+    setSearchValue('')
   }
 
   return (
@@ -35,8 +35,10 @@ const SearchForm = () => {
           <button className="flex-shrink-0 bg-teal-900 hover:bg-teal-700 border-teal-900 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded transition ease-in-out duration-500" 
           type="button"
           onClick={handleSubmit}>
-            Search
-       </button>
+            <Link href='/anime/searched/[title]' as={`/anime/searched/${searchValue}`}>
+              <a>Search</a>
+            </Link>
+          </button>
         </div>
       </form>
       <div>{formError}</div>
