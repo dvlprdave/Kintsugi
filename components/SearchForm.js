@@ -32,11 +32,11 @@ const SearchForm = ({search}) => {
             value={searchValue}
             onChange={handleInputChange}
           />
-          <button className="flex-shrink-0 bg-teal-900 hover:bg-teal-700 border-teal-900 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded transition ease-in-out duration-500" 
+          <button className="flex-shrink-0 bg-teal-900 hover:bg-teal-700 border-teal-900 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded transition ease-in-out duration-500 focus:outline-none focus:shadow-outline" 
           type="button"
           onClick={handleSubmit}>
             <Link href='/anime/searched/[title]' as={`/anime/searched/${searchValue}`}>
-              <a>Search</a>
+              <a className='focus:outline-none focus:shadow-outline'>Search</a>
             </Link>
           </button>
         </div>

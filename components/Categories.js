@@ -1,4 +1,5 @@
 const Categories = ({ categories }) => {
+  
   const CategoryTitles = categories.data.map(category => 
     <li className='pr-6 pb-2'>{category.attributes.title}</li>
   )

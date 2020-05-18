@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 const AnimeGrid = ({ anime, headingLabel }) => {
   const router = useRouter()
+  
   let headingLabelStyle = router.pathname === '/' ? '' : 'text-center mb-10'
 
   return (

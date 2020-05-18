@@ -3,28 +3,7 @@ import AnimeGrid from '../../../components/AnimeGrid'
 
 const Searched = ({anime}) => {
   return (
-    <div>
-      <h1>This is a listing of searched Anime</h1>
-      {/* {
-        anime.data.map(title => {
-          let {
-            canonicalTitle,
-            ageRatingGuide
-          } = title.attributes
-
-          return (
-            <div key={title.id}>
-              <h3>{canonicalTitle}</h3>
-              <p>{ageRatingGuide}</p>
-            </div>
-          )
-        })
-      } */}
-      <AnimeGrid
-        anime={anime}
-        // headingLabel={params.title}
-      />
-    </div>
+      <AnimeGrid anime={anime} />
   )
 }
 

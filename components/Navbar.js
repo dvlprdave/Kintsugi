@@ -18,27 +18,19 @@ const Navbar = () => {
 
       <div className={`w-full flex-grow lg:flex lg:items-center lg:w-auto `}>
         <div className='hidden lg:block lg:flex-grow text-sm md:text-lg'>
-          <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 hover:text-gray-700 mr-4">
+          <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 hover:text-gray-700 mr-4 focus:outline-none focus:shadow-outline">
             Manga
           </a>
-          <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 hover:text-gray-700 mr-4">
+          <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 hover:text-gray-700 mr-4 focus:outline-none focus:shadow-outline">
             Films
           </a>
-          <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 hover:text-gray-700">
+          <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 hover:text-gray-700 focus:outline-none focus:shadow-outline">
             Blog
           </a>
         </div>
 
         <div className='flex justify-center sm:justify-end'>
-          {/* <form>
-            <div className="flex items-center border-b border-b-2 border-teal-900 py-2">
-              <input className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Search Kintsugi" aria-label="Search Kintsugi" />
-              <button className="flex-shrink-0 bg-teal-900 hover:bg-teal-700 border-teal-900 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded transition ease-in-out duration-500" type="button">
-                Search
-            </button>
-            </div>
-          </form> */}
-          <SearchForm />
+        <SearchForm />
         </div>
 
       </div>

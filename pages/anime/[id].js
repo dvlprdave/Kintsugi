@@ -6,8 +6,9 @@ import Navbar from '../../components/Navbar'
 import TrailerVideo from '../../components/TrailerVideo'
 import Characters from './../../components/Characters'
 import Categories from '../../components/Categories';
+import Streamers from '../../components/Streamers'
 
-const Post = ({ anime, animeCharacters, categories }) => {
+const Post = ({ anime, animeCharacters, categories, streaming }) => {
   const [notMobile, setNotMobile] = useState(true)
   const [readMore, setReadMore] = useState(false)
 
@@ -46,6 +47,7 @@ const Post = ({ anime, animeCharacters, categories }) => {
   )
 
   console.log(categories)
+  console.log(streaming)
 
   return (
     <div className='relative'>
@@ -77,6 +79,8 @@ const Post = ({ anime, animeCharacters, categories }) => {
                 </li>
               </ul>
             </div>
+
+            <Streamers streaming={streaming}/>
           </div>
 
           {/* Info Section */}
@@ -126,15 +130,16 @@ const Post = ({ anime, animeCharacters, categories }) => {
 }
 
 export const getStaticProps = async ({ params }) => {
-  const [anime, animeCharacters, categories] = await Promise.all([
+  const [anime, animeCharacters, categories, streaming] = await Promise.all([
     fetch(`https://kitsu.io/api/edge/anime/${params.id}`),
     fetch(`https://kitsu.io/api/edge/anime/${params.id}/characters`),
     fetch(`https://kitsu.io/api/edge/anime/${params.id}/categories`),
+    fetch(`https://kitsu.io/api/edge/anime/${params.id}/streaming-links`),
   ])
   .then(responses => Promise.all(responses.map(response => response.json())))
     .catch(e => console.log(e, "There was an error retrieving the data"))
 
-  return { props: { anime, animeCharacters, categories } }
+  return { props: { anime, animeCharacters, categories, streaming } }
 }
 
 export const getStaticPaths = async () => {
