@@ -6,7 +6,7 @@ const Categories = ({ categories }) => {
 
   return (
     <div className='mt-12'>
-      <h2 className='mb-2'>Categories</h2>
+      <h2 className='md:text-xl pb-2 font-bold'>Categories</h2>
       <ul className='flex flex-wrap space-between content-between'>
         {CategoryTitles}
       </ul>

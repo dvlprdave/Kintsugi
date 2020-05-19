@@ -62,7 +62,7 @@ const Post = ({ anime, animeCharacters, categories, streaming }) => {
           <div className='md:max-w-284'>
             <img className='z-50 mb-6' src={small} />
 
-            <div className='xl:text-lg'>
+            <div className='xl:text-lg pb-6'>
               <h1 className='mb-2'>Anime Details</h1>
               <ul>
                 <li>
