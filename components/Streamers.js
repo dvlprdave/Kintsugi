@@ -1,10 +1,11 @@
-import useSWR from 'swr'
-import fetcher from './../helpers/fetcher'
-import Link from 'next/link'
+import useSWR from "swr"
+import fetcher from "./../helpers/fetcher"
+import Link from "next/link"
 
 const Streamers = ({ streaming }) => {
+  const streamId = streaming.data.map(stream => stream.id)
 
-  const streamSite = streaming.data.map(streamer => {
+  const streamSite = streaming.data.map((streamer) => {
     let { related } = streamer.relationships.streamer.links
     let { url } = streamer.attributes
 
@@ -18,24 +19,19 @@ const Streamers = ({ streaming }) => {
       return siteName
     })
 
-    console.log(streamerName);
     return (
-      <li className='pr-2'>
+      <li className='pr-2 mb-6'>
         <Link href={url} prefetch={false}>
-          <a>{streamerName}</a>
+          <a className='p-2 bg-gray-800 border border-gray-900 hover:bg-gray-700 transition ease-in-out duration-500'>{streamerName}</a>
         </Link>
       </li>
     )
   })
 
-  console.log(streamSite);
-  
   return (
-    <div>
-      <h2 className='md:text-xl pb-2 font-bold'>Streaming On</h2>
-      <ul className='flex flex-wrap'>
-        {streamSite}
-      </ul>
+    <div key={streamId}>
+      <h2 className='md:text-xl pb-6 font-bold'>Streaming On</h2>
+      <ul className='flex flex-wrap'>{streamSite}</ul>
     </div>
   )
 }

@@ -20,7 +20,7 @@ const Characters = ({ animeCharacters }) => (
           {
             characterImg
               ? (
-                <div>
+                <div key={item.id}>
                   <div className='h-full md:w-24 lg:w-16 xl:w-auto'>
                     <img className='object-cover' src={characterImg.original} alt="character" />
                   </div>
