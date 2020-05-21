@@ -9,9 +9,11 @@ import Characters from "./../../components/Characters"
 import Categories from "../../components/Categories"
 import Streamers from "../../components/Streamers"
 import Reviews from "../../components/Reviews"
-import { Router } from "next/router"
 
 const Post = ({ anime, animeCharacters, categories, streaming, reviews}) => {
+  const router = useRouter()
+  if(router.isFallback) return <div>loading...</div>
+
   const [readMore, setReadMore] = useState(false)
 
   const handleReadMore = () => setReadMore((prevState) => !prevState)
@@ -34,9 +36,6 @@ const Post = ({ anime, animeCharacters, categories, streaming, reviews}) => {
 
   const synopsisSubString = () =>
     !readMore ? synopsis.substring(0, 240) : synopsis.substring(0, 2000)
-
-  const router = useRouter()
-  if(router.isFallback) return <div>loading...</div>
 
   return (
     <div className='relative'>
@@ -127,6 +126,8 @@ export const getStaticProps = async ({ params }) => {
       Promise.all(responses.map((response) => response.json()))
     )
     .catch((e) => console.log(e, "There was an error retrieving the data"))
+
+    console.log(anime, animeCharacters, categories, streaming, reviews)
 
   return { props: { anime, animeCharacters, categories, streaming, reviews } }
 }
