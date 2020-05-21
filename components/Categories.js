@@ -1,7 +1,13 @@
+import Link from 'next/link'
+
 const Categories = ({ categories }) => {
   
   const CategoryTitles = categories.data.map(category => 
-    <li className='align-middle px-4 py-1 mr-2 mb-4 bg-gray-800 border border-gray-900 hover:bg-gray-700 transition ease-in-out duration-500'>{category.attributes.title}</li>
+    <li className='align-middle px-4 py-1 mr-2 mb-4 bg-gray-800 border border-gray-900 hover:bg-gray-700 transition ease-in-out duration-500'>
+      <Link href='/anime/categories/[categories]' as={`/anime/categories/${category.attributes.title}`}>
+        <a>{category.attributes.title}</a>
+      </Link>
+    </li>
   )
 
   return (
