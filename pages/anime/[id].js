@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useRouter } from 'next/router'
 import fetch from "isomorphic-unfetch"
 import formatedDates from "./../../helpers/formatDates"
 
@@ -8,6 +9,7 @@ import Characters from "./../../components/Characters"
 import Categories from "../../components/Categories"
 import Streamers from "../../components/Streamers"
 import Reviews from "../../components/Reviews"
+import { Router } from "next/router"
 
 const Post = ({ anime, animeCharacters, categories, streaming, reviews}) => {
   const [readMore, setReadMore] = useState(false)
@@ -32,6 +34,9 @@ const Post = ({ anime, animeCharacters, categories, streaming, reviews}) => {
 
   const synopsisSubString = () =>
     !readMore ? synopsis.substring(0, 240) : synopsis.substring(0, 2000)
+
+  const router = useRouter()
+  if(router.isFallback) return <div>loading...</div>
 
   return (
     <div className='relative'>
@@ -134,7 +139,7 @@ export const getStaticPaths = async () => {
     params: { id: show.id },
   }))
 
-  return { paths, fallback: false }
+  return { paths, fallback: true }
 }
 
 export default Post

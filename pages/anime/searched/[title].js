@@ -1,7 +1,11 @@
+import {useRouter} from 'next/router'
 import fetch from 'isomorphic-unfetch'
 import AnimeGrid from '../../../components/AnimeGrid'
 
 const Searched = ({anime}) => {
+  const router = useRouter()
+  if(router.isFallback) return <div>loading...</div>
+  
   return (
       <AnimeGrid anime={anime} />
   )
@@ -22,7 +26,7 @@ export const getStaticPaths = async () => {
     params: { title: show.id }
   }))
 
-  return { paths, fallback: false }
+  return { paths, fallback: true }
 }
 
 export default Searched
