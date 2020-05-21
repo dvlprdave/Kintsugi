@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import fetch from "isomorphic-unfetch"
 import formatedDates from "./../../helpers/formatDates"
 
@@ -10,23 +10,9 @@ import Streamers from "../../components/Streamers"
 import Reviews from "../../components/Reviews"
 
 const Post = ({ anime, animeCharacters, categories, streaming, reviews}) => {
-  const [notMobile, setNotMobile] = useState(true)
   const [readMore, setReadMore] = useState(false)
 
   const handleReadMore = () => setReadMore((prevState) => !prevState)
-
-  useEffect(() => {
-    const handleResize = () => {
-      setNotMobile(window.innerWidth > 768)
-    }
-
-    window.addEventListener("resize", handleResize)
-    return () => {
-      window.removeEventListener("resize", handleResize)
-    }
-  }, [])
-
-  console.log(anime)
 
   let {
     titles: { en, ja_jp },
@@ -43,7 +29,6 @@ const Post = ({ anime, animeCharacters, categories, streaming, reviews}) => {
   } = anime.data.attributes
 
   const defaultImg = "/cover-img-default.jpg"
-  let { count } = animeCharacters.meta
 
   const synopsisSubString = () =>
     !readMore ? synopsis.substring(0, 240) : synopsis.substring(0, 2000)
@@ -114,41 +99,9 @@ const Post = ({ anime, animeCharacters, categories, streaming, reviews}) => {
             </div>
 
             {/* Sidebar */}
-            <section className='max-w-full lg:max-w-sm mt-10 md:ml-6 lg:ml-0'>
-              <div className=' md:mt-10 mb-6'>
-                <h2 className='md:text-xl pb-6 font-bold'>Trailer</h2>
-
-                {notMobile ? (
-                  <TrailerVideo videoId={youtubeVideoId} />
-                ) : (
-                  <div>
-                    <a
-                      className='z-99 p-12'
-                      href={`https://www.youtube.com/watch?v=${youtubeVideoId}`}
-                      target='_blank'
-                    >
-                      <TrailerVideo
-                        videoId={youtubeVideoId}
-                        height='90'
-                        width='100%'
-                      />
-                    </a>
-                  </div>
-                )}
-              </div>
-
-              <div className='grid grid-cols-4 xl:grid-cols-5 gap-4'>
-                <h3 className='col-span-4 md:col-span-4 xl:col-span-5 md:text-xl pb-2 font-bold'>
-                  Characters
-                </h3>
-                {!count ? (
-                  <p className='col-span-4 md:text-lg'>
-                    There are no viewable characters
-                  </p>
-                ) : (
-                  <Characters animeCharacters={animeCharacters} />
-                )}
-              </div>
+            <section className='lg:max-w-sm mt-10 md:ml-6 lg:ml-0'>
+              <TrailerVideo youtubeVideoId={youtubeVideoId} />
+              <Characters animeCharacters={animeCharacters} />
             </section>
           </div>
         </div>

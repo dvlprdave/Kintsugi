@@ -16,7 +16,7 @@ const userReview = reviews.data.map(review => {
 })
 
 return (
-  <div className='max-w-lg xl:max-w-2xl'>
+  <div className='lg:max-w-lg xl:max-w-2xl'>
     <h2 className='font-bold mb-6 md:text-2xl'>Reviews</h2>
     <ul>
       {userReview}

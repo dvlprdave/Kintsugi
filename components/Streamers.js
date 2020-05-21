@@ -31,7 +31,11 @@ const Streamers = ({ streaming }) => {
   return (
     <div key={streamId}>
       <h2 className='md:text-xl pb-6 font-bold'>Streaming On</h2>
-      <ul className='flex flex-wrap'>{streamSite}</ul>
+      {
+        !streaming.data.length 
+        ? <p>Nothing to stream</p> 
+        : <ul className='flex flex-wrap'>{streamSite}</ul>
+      }
     </div>
   )
 }
