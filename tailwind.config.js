@@ -2,7 +2,7 @@ module.exports = {
   theme: {
     extend: {
       gridTemplateColumns: {
-        'fill': 'repeat(auto-fill,minmax(250px, 1fr))',
+        'fill': 'repeat(auto-fill,minmax(200px, 1fr))',
         'large': '24% 40% 1fr',
         'anime': '20% 1fr 1fr',
         'maxContent': 'max-content 1fr',
@@ -25,7 +25,7 @@ module.exports = {
         'full': '100%',
       },
       screens: {
-        'xl': '1500px',
+        'xl': '1400px',
       }
     },
   },

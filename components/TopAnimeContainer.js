@@ -13,11 +13,11 @@ const TrendingAnime = ({ apiUrl, page, headingLabel }) => {
   if (error) return <div>failed to load</div>
   if (!data) return <div>loading...</div>
 
-  let headingLabelStyle = router.pathname === '/' ? '' : 'text-center mb-10'
+  let headingLabelStyle = router.pathname === '/' ? 'inline-block' : 'text-center mb-10 block'
 
   return (
     <div className='mb-10'>
-      <h1 className={`mb-5 ${headingLabelStyle}`}>{headingLabel}</h1>
+      <h1 className={`mb-5 border-b-2 border-gray-500 md:border-none ${headingLabelStyle}`}>{headingLabel}</h1>
       <div className='grid grid-cols-fill gap-6'>
         {data.data.map(anime => {
           let {

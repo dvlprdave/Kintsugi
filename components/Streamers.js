@@ -33,7 +33,7 @@ const Streamers = ({ streaming }) => {
       <h2 className='md:text-xl pb-6 font-bold'>Streaming On</h2>
       {
         !streaming.data.length 
-        ? <p>Nothing to stream</p> 
+        ? <p>Streaming isn't available at this time</p> 
         : <ul className='flex flex-wrap'>{streamSite}</ul>
       }
     </div>
