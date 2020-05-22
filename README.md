@@ -1,30 +1,30 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app).
+## Kintsugi
 
-## Getting Started
+An Anime database app built with [Next.js](https://nextjs.org/). Users are able to view top rated Anime titles and search from thousands of existing titles. 
 
-First, run the development server:
+![kintsugi-screenshot](https://user-images.githubusercontent.com/24438722/82617572-764b3600-9b9e-11ea-9948-466a5906c162.png)
 
-```bash
-npm run dev
-# or
+
+
+and bootstrapped with [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app).
+
+## Installation
+
+### Clone
+
+Clone this repo to your local machine using `https://github.com/dvlprdave/Kintsugi`
+
+### Setup
+
+- Install dependencies by running the following within your terminal
+```
+yarn
+```
+
+### Run App
+
+```
 yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/zeit/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on ZEIT Now
-
-The easiest way to deploy your Next.js app is to use the [ZEIT Now Platform](https://zeit.co/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
