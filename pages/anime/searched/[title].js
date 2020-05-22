@@ -6,9 +6,7 @@ const Searched = ({anime}) => {
   const router = useRouter()
   if(router.isFallback) return <div>loading...</div>
   
-  return (
-      <AnimeGrid anime={anime} />
-  )
+  return <AnimeGrid anime={anime} />
 }
 
 export const getStaticProps = async ({ params }) => {

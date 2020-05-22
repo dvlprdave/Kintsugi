@@ -37,7 +37,6 @@ const TrailerVideo = ({youtubeVideoId, height, width='100%'}) => {
             <YouTube
               videoId={youtubeVideoId}
               height='90'
-              // width='100%'
             />
           </a>
         </div>

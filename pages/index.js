@@ -12,9 +12,7 @@ const Home = () => (
       <link rel="icon" href="/favicon.ico" />
     </Head>
 
-    <SWRConfig
-      value={{ fetcher }}
-    >
+    <SWRConfig value={{ fetcher }}>
       <PopularAnime />
       <PopularFilms />
     </SWRConfig>

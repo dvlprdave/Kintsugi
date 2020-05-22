@@ -8,9 +8,7 @@ const Category = ({anime, categoryName}) => {
 
   const searchedCategory = `Category: ${categoryName}`
 
-  return (
-      <AnimeGrid anime={anime} headingLabel={searchedCategory} />
-  )
+  return <AnimeGrid anime={anime} headingLabel={searchedCategory} />
 }
 
 export const getStaticProps = async ({ params }) => {

@@ -3,11 +3,7 @@ import SiteLayout from './../components/Layout/SiteLayout'
 
 export default function MyApp({ Component, pageProps, router }) {
 
-  if (router.pathname === '/anime/[id]') {
-    return (
-      <Component {...pageProps} />
-    )
-  }
+  if (router.pathname === '/anime/[id]') return <Component {...pageProps} />
 
   return (
     <SiteLayout>

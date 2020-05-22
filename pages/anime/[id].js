@@ -1,12 +1,12 @@
 import { useState } from "react"
 import { useRouter } from 'next/router'
 import fetch from "isomorphic-unfetch"
-import formatedDates from "./../../helpers/formatDates"
 
 import Navbar from "../../components/Navbar"
 import TrailerVideo from "../../components/TrailerVideo"
 import Characters from "./../../components/Characters"
 import Categories from "../../components/Categories"
+import Details from '../../components/Details'
 import Streamers from "../../components/Streamers"
 import Reviews from "../../components/Reviews"
 
@@ -53,30 +53,17 @@ const Post = ({ anime, animeCharacters, categories, streaming, reviews}) => {
           <div className='md:max-w-284'>
             <img className='z-50 mb-6' src={small} />
 
-            <div className='xl:text-lg pb-6'>
-              <h1 className='mb-2'>Anime Details</h1>
-              <ul>
-                <li>
-                  <span className='font-bold'>Japanese Title:</span> {ja_jp}
-                </li>
-                <li>
-                  <span className='font-bold'>Aired:</span>{" "}
-                  {formatedDates(startDate, endDate)}
-                </li>
-                <li>
-                  <span className='font-bold'>Rating:</span> {ageRating} /{" "}
-                  {ageRatingGuide}
-                </li>
-                <li>
-                  <span className='font-bold'>Episodes:</span> {episodeCount}
-                </li>
-              </ul>
-            </div>
-
+            <Details
+              ja_jp={ja_jp}
+              startDate={startDate}
+              endDate={endDate}
+              ageRating={ageRating}
+              ageRatingGuide={ageRatingGuide}
+              episodeCount={episodeCount}
+            />
             <Streamers streaming={streaming} />
           </div>
 
-          {/* Info Section */}
           <div className='flex flex-wrap lg:flex-no-wrap flex-initial md:flex-1 '>
             <div className='mt-6 md:mt-40 md:ml-6 lg:mr-10'>
               <h1 className='sm:text-3xl pb-1'>{en}</h1>
