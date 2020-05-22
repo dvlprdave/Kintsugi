@@ -22,7 +22,7 @@ const TrailerVideo = ({youtubeVideoId, height, width='100%'}) => {
   }
 
   return (
-    <div className=' md:mt-10 mb-6'>
+    <div className='md:mt-10 mb-6'>
       <h2 className='md:text-xl pb-6 font-bold'>Trailer</h2>
 
       {notMobile ? (
@@ -37,7 +37,7 @@ const TrailerVideo = ({youtubeVideoId, height, width='100%'}) => {
             <YouTube
               videoId={youtubeVideoId}
               height='90'
-              width='100%'
+              // width='100%'
             />
           </a>
         </div>

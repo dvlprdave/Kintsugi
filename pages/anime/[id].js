@@ -77,7 +77,7 @@ const Post = ({ anime, animeCharacters, categories, streaming, reviews}) => {
           </div>
 
           {/* Info Section */}
-          <div className='flex flex-wrap lg:flex-no-wrap md:flex-1 '>
+          <div className='flex flex-wrap lg:flex-no-wrap flex-initial md:flex-1 '>
             <div className='mt-6 md:mt-40 md:ml-6 lg:mr-10'>
               <h1 className='sm:text-3xl pb-1'>{en}</h1>
               <h2 className='sm:text-xl lg:text-2xl pb-4 text-yellow-600'>
@@ -103,7 +103,7 @@ const Post = ({ anime, animeCharacters, categories, streaming, reviews}) => {
             </div>
 
             {/* Sidebar */}
-            <section className='lg:max-w-sm mt-10 md:ml-6 lg:ml-0'>
+            <section className='w-full lg:max-w-sm mt-10 md:ml-6 lg:ml-0'>
               <TrailerVideo youtubeVideoId={youtubeVideoId} />
               <Characters animeCharacters={animeCharacters} />
             </section>
