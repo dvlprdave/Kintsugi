@@ -41,7 +41,7 @@ const Post = ({ anime, animeCharacters, categories, streaming, reviews}) => {
     <div className='relative'>
       <div className='z-0'>
         <img
-          className='absolute mb-4 h-12 min-h-230 w-full object-cover opacity-50'
+          className='absolute mb-4 h-12 min-h-230 min-w-full object-cover opacity-50'
           src={!coverImage ? defaultImg : coverImage.large}
         />
       </div>
@@ -74,7 +74,7 @@ const Post = ({ anime, animeCharacters, categories, streaming, reviews}) => {
                 </span>
               </h2>
               <div>
-                <p className='max-w-2xl pb-3 overflow-hidden xl:text-lg'>
+                <p className='max-w-lg lg:max-w-2xl pb-3 overflow-hidden xl:text-lg'>
                   {synopsisSubString()}
                   <span className={!readMore ? "inline" : "hidden"}>...</span>
                 </p>
@@ -90,7 +90,7 @@ const Post = ({ anime, animeCharacters, categories, streaming, reviews}) => {
             </div>
 
             {/* Sidebar */}
-            <section className='w-full lg:max-w-sm mt-10 md:ml-6 lg:ml-0'>
+            <section className='w-full max-w-full lg:max-w-sm mt-10 md:ml-6 lg:ml-0'>
               <TrailerVideo youtubeVideoId={youtubeVideoId} />
               <Characters animeCharacters={animeCharacters} />
             </section>

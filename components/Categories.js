@@ -11,7 +11,7 @@ const Categories = ({ categories }) => {
   )
 
   return (
-    <div className='mt-12 mb-6'>
+    <div className='mt-12 mb-6 max-w-lg lg:max-w-2xl'>
       <h2 className='md:text-xl pb-6 font-bold'>Categories</h2>
       <ul className='flex flex-wrap space-between'>
         {CategoryTitles}

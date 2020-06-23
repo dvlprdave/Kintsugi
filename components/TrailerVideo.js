@@ -35,8 +35,8 @@ const TrailerVideo = ({youtubeVideoId, height, width='100%'}) => {
             target='_blank'
           >
             <YouTube
+              className='w-full h-auto'
               videoId={youtubeVideoId}
-              height='90'
             />
           </a>
         </div>
