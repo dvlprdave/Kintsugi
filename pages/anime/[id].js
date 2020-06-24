@@ -45,7 +45,7 @@ const Post = ({ anime, animeCharacters, categories, streaming, reviews}) => {
           src={!coverImage ? defaultImg : coverImage.large}
         />
       </div>
-      <div className='relative container z-50'>
+      <div className='relative container z-50 mb-8'>
         <Navbar />
 
         <div className='mt-16 flex flex-wrap md:flex-no-wrap'>
